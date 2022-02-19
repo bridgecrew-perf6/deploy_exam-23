@@ -1,16 +1,21 @@
 const {Core} = require('../models/core.model');
 
 module.exports.createProduct = (req,res) =>{
-    const {title,price,description} = req.body;
+    const {name,type,description,skill1,skill2,skill3} = req.body;
 
     Core.create({
-        title,
-        price,
-        description
+        name,
+        type,
+        description,
+        skill1,
+        skill2,
+        skill3
 
     })
     .then(product => res.json(product))
-    .catch(err=>res.json(err))
+    .catch(err=>{
+        res.status(400).json(err)
+    })
 }
 
 module.exports.getAllProducts = (req,res) => {
@@ -33,9 +38,11 @@ module.exports.getProduct = (req,res) => {
 }
 
 module.exports.updateProduct = (req,res) => {
-    Core.findOneAndUpdate({_id:req.params.id},req.body,{new:true})
+    Core.updateOne({_id:req.params.id},req.body,{runValidators:true})
     .then(updateProduct => res.json(updateProduct))
-    .catch(err => res.json(err))
+    .catch(err => {
+        res.status(400).json(err)
+    })
 }
 
 module.exports.deleteProduct = (req,res) => {

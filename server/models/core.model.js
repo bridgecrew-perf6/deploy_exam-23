@@ -1,17 +1,27 @@
 const mongoose = require('mongoose');
 
 const CoreSchema = new mongoose.Schema({
-    title:  {type:String,
-            required: [true, 'Field required'],
+    name:  {type:String,
+            required: [true, 'Name required'],
             minlength: [3, 'Length must be at least 3 characters']
             },
-    price:  { type:Number,
-            required: [true, 'Field required']
+    type:  { type:String,
+            required: [true, 'Type required'],
+            minlength: [3, 'Length must be at least 3 characters']
             },
     description:{   type:String,
-                    required: [true, 'Field required'],
+                    required: [true, 'Description required'],
                     minlength: [3, 'Length must be at least 3 characters']
-                }
+                },
+        skill1: {
+                type:String
+        },
+        skill2:{
+                type:String
+        },
+        skill3:{
+                type:String
+        }
 
 },{timestamps:true})
 

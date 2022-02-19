@@ -3,6 +3,7 @@ import React, { useContext, useEffect,useState } from 'react'
 import { ProductForm } from '../components/ProductForm'
 import { ProductList } from '../components/ProductList';
 import { myContext } from '../context/Mycontext';
+import Header  from './Header';
 
 export const Main = () => {
 
@@ -28,9 +29,9 @@ export const Main = () => {
 
     <div>
 
-        <ProductForm  />
-
-        {products.length > 0 && <ProductList />}
+        {/* <ProductForm  /> */}
+        <Header/>
+        <ProductList />
 
 {/*         
         <ProductForm products = {products} setProducts = {setProducts} />

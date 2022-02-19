@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useParams } from 'react-router'
 import { myContext } from '../context/Mycontext';
@@ -7,38 +7,50 @@ import { myContext } from '../context/Mycontext';
 
 export const ProductList = () => {
 
-    const {products,removeFromDom} = useContext(myContext);
+    const { products, removeFromDom } = useContext(myContext);
 
     const { id } = useParams();
 
 
     const deleteProduct = (productId) => {
-        axios.delete("http://localhost:8000/api/product/"+ productId)
+        axios.delete("http://localhost:8000/api/product/" + productId)
             .then(res => {
                 removeFromDom(productId)
             })
     }
 
     return (
-
-        <ol className="list-group list-group-numbered">
-            <hr className='mt-5'/>
-            <h3>List of Products</h3>
+        
+        <table className="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
             {products?.map((product, index) => {
-                return (                  
-                        <li key= {product._id} className="list-group-item d-flex justify-content-between align-items-start">
-                            <div className="ms-2 me-auto">
-                                <Link to={product._id}>{product.title}</Link>
-                                <div className="fw-bold">{product._id}</div>    
-                            </div>
-                            <button onClick = {(e) => {deleteProduct(product._id)}} type="button" className="btn btn-danger mx-5">Delete</button>
-                        </li>
-                   
-                )
+                     return (     
+
+                <tr key = {index}>
+                    <td scope="row">{product.name}</td>
+                    <td scope="row">{product.type}</td>                                 
+                    <td>
+                        
+                        <Link to={"/pets/"+product._id} className='btn btn-info'>details</Link>
+                        <Link className='btn btn-warning mx-2' to={"/pets/"+ product._id+"/edit"}>Edit</Link>
+                        {/* <Link to="/pets/:id" className='btn btn-warning'>edit</Link> */}
+                    </td>                    
+                </tr>
+
+            )
             })}
-     </ol>
 
+            </tbody>
+        </table>
 
+        
 
     )
 }

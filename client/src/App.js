@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ProductForm } from "./components/ProductForm";
 import { Mycontext } from "./context/Mycontext";
 import Detail from "./views/Detail";
 import {Main} from "./views/Main";
@@ -11,16 +12,18 @@ function App() {
 
   return (
 
-    <div className="d-flex justify-content-center">
+    <div className="container">
 
       <BrowserRouter>
 
       <Mycontext>
         <Routes>
 
-          <Route path='/' element = {<Main />}/>    
-          <Route path='/:id' element = {<Detail/>}/>  
-          <Route path='/:id/edit' element = {<Update/>}/>  
+          <Route index element = {<Main />}/>   
+          <Route path='/pet/new' element = {<ProductForm/>}/>   
+           
+          <Route path='/pets/:id' element = {<Detail/>}/>  
+          <Route path='/pets/:id/edit' element = {<Update/>}/>  
           
 
         </Routes>
